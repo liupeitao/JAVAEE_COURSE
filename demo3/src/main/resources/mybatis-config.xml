@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-config.dtd">
+
+
+<configuration>
+ <settings>
+ <setting name="logImpl" value="LOG4J"/>
+ </settings>
+ 
+<environments default="development">
+<!-- in tag of environments you can create many of environments .-->
+	<environment id="development">
+		<transactionManager type="JDBC" />
+		<dataSource type="POOLED">
+				<!-- 配置连接数据库的4个基本信息 -->
+				<property name="driver" value="com.mysql.cj.jdbc.Driver"/>
+				<property name="url" value="jdbc:mysql://124.221.128.113:3306/javaee?useUnicode=true&amp;characterEncoding=utf-8&amp;serverTimezone=GMT&amp;nullCatalogMeansCurrent = true"/>
+				<property name="username" value="root"/>
+				<property name="password" value="Liupeitao1."/>
+		</dataSource>
+	</environment>
+
+<!-- other environment there if you defined-->
+
+<!---->
+
+</environments>
+	<mappers>
+		<mapper resource="UserMapper.xml" />
+	</mappers>
+<!--		这里列出所有的mapper文件, 把每个mapper文件中的namespace整合在一起, 使用namespace.field 使用sql语句.
+			List<User> list = session.selectList("UserMapper.SelectAllUser");
+-->
+
+  
+</configuration>

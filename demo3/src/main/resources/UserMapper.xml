@@ -1,0 +1,37 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="UserMapper">
+<!--经过测试, 如果把namespace的值改掉, 那么:
+List<User> list = session.selectList("UserMapper.SelectAllUser");
+这里的UserMapper 也必须改, 实现了一种封装, 类似c++中的namespace.
+java 每个public类, 都必须和源文件名相同.
+  c++ namespace: A namespace is a declarative region that provides a scope to the identifiers
+ (the names of types, functions, variables, etc) inside it.
+ 1. 为什么这里要用namespace 而不是直接用文件名?
+ 2. 经测试, 每个源文件, 不能有两个mapper标签, 那么标签为什么还用namespace?
+
+ 老师课件说: mybatis-config.xml 文件可以加载多个映射文件，每个文件对应数据库中的一张表
+-->
+
+	<select id="SelectAllUser" resultType="liu.mapper.pojo.User">
+	select *from tb_usr;
+	</select>
+
+	<select id="SelcetUserbyId" parameterType="Integer" resultType="liu.mapper.pojo.User">
+	select * from tb_usr where id = #{id};
+	</select>
+
+	<update id="UpdateUser"  parameterType="liu.mapper.pojo.User">
+				update tb_usr set name = #{name} , gender = #{gender} where  id = #{id};
+	</update>
+
+	<insert id="InsertUser"  useGeneratedKeys="true"  keyProperty="id" parameterType="liu.mapper.pojo.User">
+	insert into tb_usr (id, name, gender) values (#{id}, #{name} , #{gender});
+	</insert>
+
+	<delete id="DeleteUser" parameterType="Integer">
+		delete from tb_usr where id = #{id};
+	</delete>
+</mapper>
